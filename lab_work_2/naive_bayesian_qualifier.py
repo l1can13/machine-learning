@@ -1,5 +1,6 @@
 import numpy as np  # Импорт библиотеки для работы с массивами и матрицами
 
+
 class SelfmadeNaiveBayesClassifier:
     """
     Наивный Байесовский классификатор.
@@ -34,9 +35,12 @@ class SelfmadeNaiveBayesClassifier:
             None
         """
         self.num_labels = len(np.unique(training_labels))  # Определение количества уникальных меток
-        self.label_data = [training_features[training_labels == label] for label in range(self.num_labels)]  # Разделение данных для каждой метки
-        self.label_means = [np.nanmean(data, axis=0) if len(data) > 0 else np.zeros(training_features.shape[1]) for data in self.label_data]  # Расчет средних значений
-        self.label_stds = [np.nanstd(data, axis=0) if len(data) > 0 else np.ones(training_features.shape[1]) for data in self.label_data]  # Расчет стандартных отклонений
+        self.label_data = [training_features[training_labels == label] for label in
+                           range(self.num_labels)]  # Разделение данных для каждой метки
+        self.label_means = [np.nanmean(data, axis=0) if len(data) > 0 else np.zeros(training_features.shape[1]) for data
+                            in self.label_data]  # Расчет средних значений
+        self.label_stds = [np.nanstd(data, axis=0) if len(data) > 0 else np.ones(training_features.shape[1]) for data in
+                           self.label_data]  # Расчет стандартных отклонений
         total_samples = len(training_labels)
         self.label_priors = [len(data) / total_samples for data in self.label_data]  # Расчет априорных вероятностей
 
